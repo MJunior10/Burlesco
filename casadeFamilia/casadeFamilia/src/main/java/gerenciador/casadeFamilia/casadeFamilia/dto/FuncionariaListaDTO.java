@@ -11,4 +11,6 @@ public @Data class FuncionariaListaDTO {
     private String apelido;
     private Float valorAtendimento;
     private LocalDate dataNascimento;
+    private String especialidade;
+    private String supervisor;
 }

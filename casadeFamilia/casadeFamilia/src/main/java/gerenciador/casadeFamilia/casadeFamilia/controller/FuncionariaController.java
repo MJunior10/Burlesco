@@ -8,9 +8,14 @@ import gerenciador.casadeFamilia.casadeFamilia.model.Funcionaria;
 //import io.swagger.annotations.Api;
 import gerenciador.casadeFamilia.casadeFamilia.service.FuncionariaService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.persistence.Id;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,14 +30,24 @@ public class FuncionariaController {
     private FuncionariaService funcionariaService;
 
     @GetMapping()
-    @Operation(description = "Listagem geral de Funcionarias" )
+    @Operation(description = "Metodo utilizado para listagem geral de funcionarias" ,
+            responses ={
+                    @ApiResponse(responseCode = "200", description = "Listagem de todas as funcionarias",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema( schema = @Schema(implementation = FuncionariaDTO.class))))
+            })
     public List<FuncionariaListaDTO> listAll(){
         List<Funcionaria> funcionarias = funcionariaService.listarTodos();
         return funcionariaMapper.toDTO(funcionarias);
     }
 
     @PostMapping
-    @Operation(description = "Metodo utilizado para realizar a inclusão de uma Funcionaria" )
+    @Operation(description = "Método utilizado para realizar a inclusão de uma funcionaria", responses = {
+            @ApiResponse(responseCode = "200", description = "Funcionaria Incluída",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = FuncionariaDTO.class) ))
+                })
     public FuncionariaDTO incluir(@RequestBody FuncionariaDadosAlteravelDTO funcionaria)
     {
         //preparando entrada
@@ -47,28 +62,59 @@ public class FuncionariaController {
         return retorno;
     }
     @PutMapping(path="/{id}")
-    @Operation (description = "Metodo utilizado para alterar dados de uma Funcionaria")
-    public FuncionariaDTO alterar(@RequestBody() FuncionariaDadosAlteravelDTO funcionaria, @PathVariable(name = "id") Long id){
+    @Operation (description = "Metodo utilizado para alterar dados de uma Funcionaria" ,
+            responses ={
+                    @ApiResponse(responseCode = "200", description = "Funcionaria Alterada com sucesso",
+                         content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema())),
+                    @ApiResponse(responseCode = "404", description = "Funcionaria nao encontrada",
+                            content = @Content(
+                            mediaType = "application/json"))
+    })
+    public ResponseEntity<FuncionariaDTO> alterar(@RequestBody() FuncionariaDadosAlteravelDTO funcionaria, @PathVariable(name = "id") Long id){
     Funcionaria pFuncionaria = funcionariaMapper.toModelo(funcionaria);
     Funcionaria alterar = funcionariaService.alterar(pFuncionaria, id);
-    return funcionariaMapper.toFuncionariaDTO(alterar);
+    return ResponseEntity.ok(funcionariaMapper.toFuncionariaDTO(alterar));
     }
     @DeleteMapping(path ="/{id}")
-    @Operation(description = "Método utililzado para remover uma funcionaria pelo ID informada")
-    public FuncionariaDTO remover(@PathVariable(name = "id") Long id){
+    @Operation(description = "Método utililzado para remover uma funcionaria pelo ID informada" ,
+            responses ={
+            @ApiResponse(responseCode = "200", description = "Funcionaria Removida com sucesso",
+                    content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema())),
+            @ApiResponse(responseCode = "404", description = "Funcionaria nao encontrada",
+                    content = @Content(
+                            mediaType = "application/json"))
+    })
+    public ResponseEntity<FuncionariaDTO> remover(@PathVariable(name = "id") Long id){
         Funcionaria funcionariaExcluida = this.funcionariaService.excluir(id);
-        return funcionariaMapper.toFuncionariaDTO(funcionariaExcluida);
+        return ResponseEntity.ok(funcionariaMapper.toFuncionariaDTO(funcionariaExcluida));
     }
 
     @GetMapping(path = "/{id}")
-    @Operation(description = "Obter os dados completos de uma funcionaria pelo ID informado!")
-    public FuncionariaDTO ObterPorId(@PathVariable(name = "id") Long id){
+    @Operation(description = "Obter os dados completos de uma funcionaria pelo ID informado!",
+            responses ={
+                    @ApiResponse(responseCode = "200", description = "Listagem de funcionaria pelo ID",
+                         content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema())),
+                    @ApiResponse(responseCode = "404", description = "Funcionaria nao encontrada",
+                         content = @Content(
+                            mediaType = "application/json"))
+    })
+    public ResponseEntity<FuncionariaDTO> ObterPorId(@PathVariable(name = "id") Long id){
         Funcionaria funcionaria = this.funcionariaService.obterFuncionariaPeloId(id);
-        return this.funcionariaMapper.toFuncionariaDTO(funcionaria);
+        return ResponseEntity.ok(this.funcionariaMapper.toFuncionariaDTO(funcionaria));
     }
 
     @PostMapping(path = "/pesquisar")
-    @Operation(description = "Busca funcionaria pelos dados informados")
+    @Operation(description = "Busca funcionarias pelos dados informados", responses = {
+            @ApiResponse(responseCode = "200", description = "Listagem de funcionarias pela pesquisa",
+                    content = @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = FuncionariaDTO.class))
+                    ))})
     public List<FuncionariaListaDTO> pesquisar(
             @RequestBody FuncionariaDTO funcionaria
     ){

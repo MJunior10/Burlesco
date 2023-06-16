@@ -9,6 +9,7 @@
 package gerenciador.casadeFamilia.casadeFamilia.configuration;
 
 import gerenciador.casadeFamilia.api.config.ApiWebConfig;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
@@ -33,8 +34,8 @@ public class WebConfig extends ApiWebConfig {
 	}*/
 
 	@Override
-	public CorsFilter corsFilter() {
-		CorsFilter corsFilter = super.corsFilter();
+	public FilterRegistrationBean corsFilter() {
+		FilterRegistrationBean corsFilter = super.corsFilter();
 		return corsFilter;
 	}
 }
