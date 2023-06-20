@@ -50,6 +50,8 @@ public class FuncionariaServiceImpl implements FuncionariaService {
         if(idade(funcionaria.getDataNascimento()) < 18)
         {
             throw new IllegalArgumentException("Idade não pode ser menor que 18 anos");
+        } else if (idade(funcionaria.getDataNascimento()) > 50) {
+            throw new IllegalArgumentException("Idade não pode ser maior que 50 anos");
         }
    }
 
