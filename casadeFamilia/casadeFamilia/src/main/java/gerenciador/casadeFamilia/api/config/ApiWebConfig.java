@@ -10,7 +10,6 @@ package gerenciador.casadeFamilia.api.config;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -25,7 +24,7 @@ public class ApiWebConfig {
 	/**
 	 * Retorna a instância de {@link CorsFilter} responsável por desabilitar o
 	 * 'CORS' de forma global na aplicação.
-	 * 
+	 *
 	 * @return
 	 */
 	@Bean

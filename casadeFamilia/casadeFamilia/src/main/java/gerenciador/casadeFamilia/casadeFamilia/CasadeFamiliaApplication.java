@@ -20,11 +20,5 @@ public class CasadeFamiliaApplication {
 		SpringApplication.run(CasadeFamiliaApplication.class, args);
 	}
 
-	private static void imprimirLista(FuncionariaRepository funcionariaRepository) {
-		List<Funcionaria> lista = funcionariaRepository.findAll();
-		lista.forEach(item ->{
-			System.out.println("funcionariaRepository:"+item);
-		});
-	}
 
 }

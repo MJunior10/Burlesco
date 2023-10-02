@@ -1,4 +1,4 @@
-/*
+package gerenciador.casadeFamilia.api.config;/*
  * SecurityConfig.java
  * Copyright (c) UEG.
  *
@@ -7,7 +7,7 @@
  *
  *//*
 
-package gerenciador.casadeFamilia.api.config;
+package br.ueg.prog.webi.api.config;
 
 
 import br.ueg.modelo.api.security.AuthenticationProvider;
@@ -80,5 +80,23 @@ public abstract class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new CredentialProvider();
 	}
 
+}
+
+package br.ueg.prog.webi.faculdade.configuration;
+
+import br.ueg.prog.webi.api.config.ApiSecurityConfig;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
+@Configuration
+@EnableWebSecurity
+@EnableMethodSecurity
+public class SecurityConfig extends ApiSecurityConfig {
+    @Override
+    protected void configureHttpSecurity(HttpSecurity http) {
+
+    }
 }
 */
