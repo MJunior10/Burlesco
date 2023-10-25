@@ -40,6 +40,7 @@ public class ReservaServiceImpl
     }
     @Override
     public Reserva alterar(Reserva entidade, Long id) {
+        this.validarReserva(entidade);
         this.tratarReserva(entidade);
         return super.alterar(entidade, id);
     }

@@ -14,6 +14,9 @@ public interface ReservaMapper  extends BaseMapper<Reserva, ReservaDTO> {
 
     @Override
     @Mapping(source = "funcionaria.id" , target = "funcionaria_id")
+    @Mapping(source = "funcionaria.nome" , target = "funcionaria_nome")
+    @Mapping(source = "funcionaria.apelido" , target = "funcionaria_apelido")
+    @Mapping(source = "funcionaria.supervisor" , target = "funcionaria_supervisor")
     ReservaDTO toDTO(Reserva modelo);
 
     @Override

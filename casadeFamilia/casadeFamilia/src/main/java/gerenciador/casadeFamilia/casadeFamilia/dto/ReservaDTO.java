@@ -15,4 +15,7 @@ public @Data class ReservaDTO {
     private String nomeCliente;
     private LocalDate dataReserva;
     private Long funcionaria_id;
+    private String funcionaria_nome;
+    private String funcionaria_apelido;
+    private String funcionaria_supervisor;
 }
