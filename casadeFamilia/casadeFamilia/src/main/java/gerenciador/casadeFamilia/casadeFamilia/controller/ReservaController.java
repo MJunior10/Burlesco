@@ -23,7 +23,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "api/${app.api.version}/reserva")
+@RequestMapping(path = "${app.api.base}/reserva")
 public class ReservaController extends CrudController
         <Reserva, ReservaDTO, Long, ReservaMapper, ReservaService> {
     @PostMapping (path = "/pesquisar")

@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
-@RequestMapping(path = "api/${app.api.version}/funcionaria")
+@RequestMapping(path = "${app.api.base}/funcionaria")
 public class FuncionariaController extends CrudController
         <Funcionaria, FuncionariaDTO, Long, FuncionariaMapper, FuncionariaService> {
 

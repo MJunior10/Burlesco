@@ -2,6 +2,7 @@ package gerenciador.casadeFamilia.casadeFamilia.model;
 
 import gerenciador.casadeFamilia.api.model.BaseEntidade;
 import gerenciador.casadeFamilia.api.model.IEntidade;
+import gerenciador.casadeFamilia.api.model.annotation.PkComposite;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import lombok.*;
@@ -19,9 +20,9 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 @ToString
 @RequiredArgsConstructor
 @Entity
+@PkComposite
 @Data
 @Table(name = "TBL_FUNCIONARIAS")
-
 public class Funcionaria implements IEntidade<Long> {
 
     @SequenceGenerator(
@@ -53,6 +54,11 @@ public class Funcionaria implements IEntidade<Long> {
     @Override
     public String getTabelaNome() {
         return "funcionarias";
+    }
+
+    @Override
+    public Long getIdFromHash(String hash) {
+        return null;
     }
 
     @Override

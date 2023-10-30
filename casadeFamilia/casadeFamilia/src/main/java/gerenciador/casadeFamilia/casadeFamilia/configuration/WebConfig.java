@@ -33,9 +33,9 @@ public class WebConfig extends ApiWebConfig {
 		return new MethodValidationPostProcessor();
 	}*/
 
-	@Override
-	public FilterRegistrationBean corsFilter() {
-		FilterRegistrationBean corsFilter = super.corsFilter();
-		return corsFilter;
-	}
+//	@Override
+//	public FilterRegistrationBean corsFilter() {
+//		FilterRegistrationBean corsFilter = super.corsFilter();
+//		return corsFilter;
+//	}
 }

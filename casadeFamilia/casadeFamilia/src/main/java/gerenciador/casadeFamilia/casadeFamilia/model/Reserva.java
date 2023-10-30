@@ -2,6 +2,8 @@ package gerenciador.casadeFamilia.casadeFamilia.model;
 
 
 import gerenciador.casadeFamilia.api.model.IEntidade;
+import gerenciador.casadeFamilia.api.model.annotation.PkComposite;
+import gerenciador.casadeFamilia.api.util.Reflexao;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -17,6 +19,7 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 @RequiredArgsConstructor
 @Entity
 @Data
+@PkComposite
 @Table(name = "TBL_RESERVA")
 
 public class Reserva implements IEntidade<Long> {
@@ -45,6 +48,10 @@ public class Reserva implements IEntidade<Long> {
     public String getTabelaNome() {
         return "reservas";
     }
+
+    @Override
+    public Long getIdFromHash(String hash) {
+        return null;    }
 
     @Override
     public boolean equals(Object o) {

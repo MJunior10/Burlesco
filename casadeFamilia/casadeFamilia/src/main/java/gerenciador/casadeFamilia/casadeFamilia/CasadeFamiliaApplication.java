@@ -12,8 +12,20 @@ import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import java.util.List;
 import java.util.Optional;
 
-@SpringBootApplication
-@EntityScan(basePackageClasses = { Jsr310JpaConverters.class }, basePackages = "gerenciador.casadeFamilia.*")
+@SpringBootApplication(
+		scanBasePackages = {
+				"gerenciador.casadeFamilia.*",
+				"gerenciador.casadeFamilia.casadeFamilia.*",
+				"gerenciador.casadeFamilia.api.*"
+		}
+)
+@EntityScan(basePackageClasses = { Jsr310JpaConverters.class },
+		basePackages = {
+				"gerenciador.casadeFamilia.*",
+				"gerenciador.casadeFamilia.casadeFamilia.*",
+				"gerenciador.casadeFamilia.api.*"
+		}
+)
 public class CasadeFamiliaApplication {
 
 	public static void main(String[] args) {

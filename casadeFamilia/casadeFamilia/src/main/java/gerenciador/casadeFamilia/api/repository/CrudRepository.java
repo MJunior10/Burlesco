@@ -1,4 +1,6 @@
 package gerenciador.casadeFamilia.api.repository;
 
-public class CrudRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CrudRepository<ENTIDADE> extends JpaRepository<ENTIDADE, Long> {
 }
