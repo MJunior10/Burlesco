@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface FuncionariaRepository extends CrudRepository<Funcionaria> {
+public interface FuncionariaRepository extends CrudRepository<Funcionaria>, FuncionariaRepositoryCustom {
 
 }

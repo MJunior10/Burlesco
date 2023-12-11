@@ -29,4 +29,18 @@ import java.util.List;
 public class FuncionariaController extends CrudController
         <Funcionaria, FuncionariaDTO, Long, FuncionariaMapper, FuncionariaService> {
 
+    @PostMapping (path = "/pesquisar")
+    @Operation(description = "Busca entidade pelos dados informados", responses = {
+            @ApiResponse(responseCode = "200", description = "Listagem de funcionaria pela pesquisa",
+                    content = @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = FuncionariaDTO.class))
+                    ))})
+    public List<FuncionariaDTO> pesquisar(
+            @RequestBody FuncionariaDTO entidade
+    ){
+        Funcionaria funcionariaBusca = this.mapper.toModelo(entidade);
+        List<Funcionaria> localizar = service.localizar(funcionariaBusca);
+        return this.mapper.toDTO(localizar);
+    }
+
     }

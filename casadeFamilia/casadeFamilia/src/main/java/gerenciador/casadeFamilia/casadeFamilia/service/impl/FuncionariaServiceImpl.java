@@ -20,6 +20,9 @@ public class FuncionariaServiceImpl
         extends BaseCrudService<Funcionaria, Long, FuncionariaRepository>
         implements FuncionariaService {
 
+    @Autowired
+    private FuncionariaRepository funcionariaRepository;
+
     @Override
     protected void prepararParaIncluir(Funcionaria entidade) {
 
@@ -50,5 +53,9 @@ public class FuncionariaServiceImpl
             throw new IllegalArgumentException("Idade não pode ser maior que 50 anos");
         }
    }
+    @Override
+    public List<Funcionaria> localizar(Funcionaria funcionaria) {
+        return this.funcionariaRepository.localizarPorFuncionaria(funcionaria);
+    }
 }
 
